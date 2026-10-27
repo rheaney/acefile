@@ -41,8 +41,8 @@ def test_main_header_comment_layouts(slot, size):
 
 
 
-@pytest.mark.parametrize('comment', [b'', b'comment', b'C' * 256])
-@pytest.mark.parametrize('reserved', [b'', b'\0', b'\xaa\xbb'])
+@pytest.mark.parametrize('comment', [b'', b'C', b'comment', b'C' * 256])
+@pytest.mark.parametrize('reserved', [b'', b'\0', b'\xaa\xbb', b'R' * 254])
 def test_main_header_zero_advert_preserves_reserved_bytes(comment, reserved):
     tail = b'\0' + struct.pack('<H', len(comment)) + comment + reserved
     source = io.BytesIO(_main_header(acefile.Header.FLAG_COMMENT, tail))

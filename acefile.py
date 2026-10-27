@@ -3234,7 +3234,7 @@ class AceVolume:
                     and header.flag(Header.FLAG_COMMENT) and i + 2 <= len(buf)
                     and i + 2 + struct.unpack('<H', buf[i:i+2])[0] == len(buf)
                     and not (buf[i] == 0 and i + 3 <= len(buf)
-                             and i + 3 + struct.unpack('<H', buf[i+1:i+3])[0] == len(buf))):
+                             and i + 3 + struct.unpack('<H', buf[i+1:i+3])[0] <= len(buf))):
                 if i + 1 > len(buf):
                     raise CorruptedArchiveError("truncated header")
                 avsz, = struct.unpack('<B', buf[i:i+1])
